@@ -1,0 +1,143 @@
+<div class="design__request__block section__bg__{{ section.settings.section_bg }}">
+  <div class="page-width">
+    <div class="design__intro">
+      <div class="content__section">
+        <h2>{{ section.settings.title | strip_html }}</h2>
+
+        {%- if section.settings.content -%}
+          <div class="content">
+            {{ section.settings.content }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.cta_link != '' -%}
+        <a href="{{ section.settings.cta_link }}" class="btn btn__small btn__primary__ghost js-show-contact">{{ section.settings.cta_title }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="design__steps__wrapper">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'step' -%}
+            {%- if block.settings.download_file != blank or block.settings.cta_url != blank -%}
+              <div class="design__step">
+                <img src="{{ block.settings.icon | img_url:'large'}}"/>
+                {%- if block.settings.title != '' -%}
+                  <strong>{{ block.settings.title }}</strong>
+                {%- endif -%}
+
+                {%- if block.settings.download_file != blank -%}
+                  {%- if block.settings.cta_text contains "examples" -%}
+                    <a href="{{ product.metafields.product_downloads.voorbeeld_design.value.url }}" class="btn btn__small btn__primary__ghost" download target="new">{{ block.settings.cta_text }}</a>
+                  {%- else -%}
+                    <a href="{{ product.metafields.product_downloads.design_example.value.url }}" class="btn btn__small btn__primary__ghost" download target="new">{{ block.settings.cta_text }}</a>
+                  {%- endif -%}
+                {%- elsif block.settings.cta_url != blank -%}
+                  <a href="{{ block.settings.cta_url }}" class="btn btn__small btn__primary__ghost{% if block.settings.show_popup%} js-show-contact{% endif %}" {% if block.settings.downloadable %}download{% endif %}>{{ block.settings.cta_text }}</a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Design",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Section Title"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Button Title",
+      "default": "Contacteer ons"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "section_bg",
+      "label": "Section Background",
+      "options": [
+        {
+          "value": "grey",
+          "label": "Grey"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "header",
+          "content": "Download",
+          "info": "Select a file for download, or a link to redirect"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Button Link",
+          "info": "Will redirect the user"
+        },
+        {
+          "type": "image_picker",
+          "id": "download_file",
+          "label": "Download File",
+          "info": "Will download a file"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_popup",
+          "label": "Show contact popup",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Design"
+    }
+  ]
+}
+{% endschema %}

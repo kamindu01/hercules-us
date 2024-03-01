@@ -1,0 +1,77 @@
+{%- if request.page_type == "collection" -%}
+  {%- assign products_to_display = collection.handle.all_products_count -%}
+  {%- assign collectionProducts = collection.products -%}
+{%- else -%}
+  {%- assign products_to_display = section.settings.collection.all_products_count -%}
+  {%- assign collectionProducts = section.settings.collection.products -%}
+{%- endif -%}
+
+<div class="collection page-width{% if section.settings.swipe_on_mobile == true and section.settings.collection.all_products_count > 2 and section.settings.products_to_show > 2 %} page-width-desktop{% endif %}">
+  <div class="product__simple__grid">
+    {%- for product in collectionProducts -%}
+      {% render 'product-simple-card',
+          product_card_product: product,
+          card_index: forloop.index,
+          showusp: section.settings.show_usp,
+          background: section.settings.background_color,
+          background_image: section.settings.background_image,
+          arrows: section.settings.arrow_color
+        %}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Simple Collection",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Featured collection",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured-collection.settings.collection.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-collection.settings.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_usp",
+      "label": "Show Product USP",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Product Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "background_image"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Simple Collection"
+    }
+  ]
+}
+{% endschema %}

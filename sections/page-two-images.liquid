@@ -1,0 +1,60 @@
+<div class="page__image__row">
+  <div class="page-width">
+    {%- if section.settings.title -%}
+      <h2>{{ section.settings.title | strip_html }}</h2>
+    {%- endif -%}
+
+    <div class="image__row gap__{{ section.settings.gap }}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+            {%- assign image = block.settings.image -%}
+            <img src="{{ image | img_url: 'large' }}" alt="{{ image.alt }}">
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image Row",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Leave blank to hide"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Row"
+    }
+  ]
+}
+{% endschema %}

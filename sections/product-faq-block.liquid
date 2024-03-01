@@ -1,0 +1,90 @@
+<div class="product__faq__block" id="faq">
+  <div class="page-width">
+    <h2>{{ section.settings.title | strip_html }}</h2>
+
+    <ul class="faq__list">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'question' -%}
+            {%- if block.settings.title != '' -%}
+              <li id="q-{{ forloop.index }}">
+                <strong data-for="answer-{{ forloop.index }}">
+                  {{ block.settings.title }}
+                  <span class="plus"></span>
+                </strong>
+                <div class="answer" id="answer-{{ forloop.index }}">
+                  {{ block.settings.answer }}
+                </div>
+              </li>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.outro -%}
+      <div class="content">
+        {{ section.settings.outro }}
+
+        {%- if section.settings.cta_link != blank -%}
+          <a href="{{ section.settings.cta_link }}" class="btn btn__primary__ghost js-show-contact">
+            {{ section.settings.cta_title }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "FAQ Title"
+    },
+    {
+      "type": "richtext",
+      "id": "outro",
+      "label": "FAQ Outro"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Button Title",
+      "default": "Contacteer ons"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQ"
+    }
+  ]
+}
+{% endschema %}
