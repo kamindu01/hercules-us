@@ -1,0 +1,26 @@
+<div class="product__custom__slider">
+  <div class="main__product__slider">
+    {%- for media in product.media -%}
+      <div class="main__product__image" data-slide="{{ forloop.index | minus: 1 }}" style="background-image:url('{{  media.preview_image | img_url: 'master' }}');"></div>
+    {%- endfor -%}
+  </div>
+
+  <div class="main__product__thumbs">
+    {%- for media in product.media -%}
+      {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+        <img class="{% if forloop.index == 1 %}active{% endif %} thumb__slide__item" src="{{  media.preview_image | img_url: 'medium' }}" data-slide="{{ forloop.index | minus: 1 }}" alt="{{ media.preview_image.alt | escape }}">
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<div class="product__modal__overlay">
+  <div class="modal-product">
+    <a href="#!" class="close-member"></a>
+    <div class="modal__slider">
+      {%- for media in product.media -%}
+        <div class="modal__slider__image" style="background-image:url('{{  media.preview_image | img_url: 'master' }}');"></div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

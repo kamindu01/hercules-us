@@ -1,0 +1,83 @@
+<div class="page-width">
+  <div class="product__slider__wrapper">
+    <h2>{{ section.settings.title }}</h2>
+
+    <div class="partner__slider" data-slides="{{ section.settings.slider_items }}" data-auto="{{ section.settings.autoslide }}">
+      <span class="slider__nav nav__partner prev"><</span>
+      <span class="slider__nav nav__partner next">></span>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+            <div class="partner__slider__item">
+              {%- if block.settings.partner_link -%}
+                <a href="{{ block.settings.partner_link }}" target="_blank" rel="noopener noreferrer nofollow">
+                  <img src="{{ block.settings.logo | img_url: 'large' }}" alt="{{ block.settings.title }}">
+                </a>
+              {%- else -%}
+                <img src="{{ block.settings.logo | img_url: 'large' }}" alt="{{ block.settings.title }}">
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Partner List",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title"
+    },
+    {
+      "type": "range",
+      "id": "slider_items",
+      "label": "Items to show",
+      "min": 5,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "autoslide",
+      "label": "Autoslide",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Partners",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Partner Logo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Partner Name"
+        },
+        {
+          "type": "url",
+          "id": "partner_link",
+          "label": "Partner Website"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Partner List"
+    }
+  ]
+}
+{% endschema %}

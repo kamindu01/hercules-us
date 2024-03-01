@@ -1,0 +1,324 @@
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
+  <div>
+    <div class="cart__footer">
+      {%- if section.settings.show_cart_note -%}
+        <cart-note class="cart__note field">
+          <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
+          <textarea class="text-area text-area--resize-vertical field__input" name="note" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
+        </cart-note>
+      {%- endif -%}
+
+      <div class="cart__blocks">
+        {% for block in section.blocks %}
+          {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
+            {%- when 'subtotal' -%}
+              <div class="js-contents" {{ block.shopify_attributes }}>
+                <div class="totals">
+                  <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
+                  <p class="totals__subtotal-value btw__price" data-btw="{{ cart.total_price | money_with_currency }}" data-price="{{ cart.total_price | divided_by: 1.21 | money_with_currency }}">
+                    <span class="btw__display__price">{{ cart.total_price | money_with_currency }}</span>
+                  </p>
+                </div>
+
+                <div>
+                  {%- if cart.cart_level_discount_applications.size > 0 -%}
+                    <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                      {%- for discount in cart.cart_level_discount_applications -%}
+                        <li class="discounts__discount discounts__discount--end">
+                          {%- render 'icon-discount' -%}
+                          {{ discount.title }}
+                          (-{{ discount.total_allocated_amount | money }})
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+
+                <small class="tax-note caption-large rte">
+                  {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                    <span class="btw__text btw__tax__included">
+                      {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                    </span>
+                    <span class="btw__text btw__tax__excluded">
+                      {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                    </span>
+                  {%- elsif cart.taxes_included -%}
+                    {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                  {%- elsif shop.shipping_policy.body != blank -%}
+                    {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                  {%- else -%}
+                  <span class="btw__text btw__tax__included">
+                    {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                  </span>
+                  <span class="btw__text btw__tax__excluded">
+                    {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                  </span>
+                  {%- endif -%}
+                </small>
+              </div>
+            {%- when 'vat' -%}
+              <div class="cart__vat">
+                {%- if block.settings.vat_label != "" -%}
+                  <label for="vat_reg_no" class="show-info">
+                    {{ block.settings.vat_label }}
+                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                  </label>
+                {%- endif -%}
+                {%- if block.settings.vat_info != "" -%}
+                  <small id="vat_info">{{ block.settings.vat_info }}</small>
+                {%- endif -%}
+                <input type="text" id="vat_reg_no" name="attributes[VAT]" value="{{ cart.attributes['VAT'] }}" placeholder="{{ 'weichie.cart.your_btw_number' | t }}">
+              </div>
+              <div class="cart__completed">
+                <h2>{{ 'weichie.cart.order_completed' | t }}</h2>
+              </div>
+            {%- else -%}
+              <div class="cart__ctas" {{ block.shopify_attributes }}>
+                <noscript>
+                  <button type="submit" class="cart__update-button button button--secondary" form="cart">
+                    {{ 'sections.cart.update' | t }}
+                  </button>
+                </noscript>
+
+                <button type="submit" id="checkout" class="btn btn__primary" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
+                  {{ 'sections.cart.checkout' | t }}
+                </button>
+
+                <button type="submit" id="requestinvoice" class="btn btn__primary" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
+                  {{ 'weichie.cart.send_request' | t }}
+                </button>
+              </div>
+
+              {%- if additional_checkout_buttons -%}
+                <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                  {{ content_for_additional_checkout_buttons }}
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
+        {% endfor %}
+
+        <div id="cart-errors"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="modal__invoice__overlay" id="invoiceModal">
+  <div class="modal-invoice">
+    <a href="#!" class="close-member"></a>
+    <div class="modal-content">
+      <div class="modal__form">
+        <div class="input-group full">
+          <label for="email">{{ 'weichie.cart.email_address' | t }}</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div class="input-group full">
+          <label for="country">{{ 'weichie.cart.country' | t }}</label>
+          <select autocomplete="shipping country" aria-required="true" name="country" id="country">
+            <option data-code="FR" value="France">{{ 'countries.FR' }}</option>
+            <option data-code="BE" selected="selected" value="Belgium">{{ 'countries.BE' }}</option>
+            <option disabled="disabled" value="---">---</option>
+            <option data-code="DE" value="Germany">{{ 'countries.AL' | t }}</option>
+            <option data-code="AL" value="Albania">{{ 'countries.DE' | t }}</option>
+            <option data-code="AD" value="Andorra">{{ 'countries.AD' | t }}</option>
+            <option data-code="AM" value="Armenia">{{ 'countries.AM' | t }}</option>
+            <option data-code="AT" value="Austria">{{ 'countries.AT' | t }}</option>
+            <option data-code="BY" value="Belarus">{{ 'countries.BY' | t }}</option>
+            <option data-code="BA" value="Bosnia And Herzegovina">{{ 'countries.BA' | t }}</option>
+            <option data-code="BG" value="Bulgaria">{{ 'countries.BG' | t }}</option>
+            <option data-code="CY" value="Cyprus">{{ 'countries.CY' | t }}</option>
+            <option data-code="HR" value="Croatia">{{ 'countries.HR' | t }}</option>
+            <option data-code="DK" value="Denmark">{{ 'countries.DK' | t }}</option>
+            <option data-code="ES" value="Spain">{{ 'countries.ES' | t }}</option>
+            <option data-code="EE" value="Estonia">{{ 'countries.EE' | t }}</option>
+            <option data-code="VA" value="Holy See (Vatican City State)">{{ 'countries.VA' | t }}</option>
+            <option data-code="FI" value="Finland">{{ 'countries.FI' | t }}</option>
+            <option data-code="GE" value="Georgia">{{ 'countries.GE' | t }}</option>
+            <option data-code="GI" value="Gibraltar">{{ 'countries.GI' | t }}</option>
+            <option data-code="GR" value="Greece">{{ 'countries.GR' | t }}</option>
+            <option data-code="GL" value="Greenland">{{ 'countries.GL' | t }}</option>
+            <option data-code="GP" value="Guadeloupe">{{ 'countries.GP' | t }}</option>
+            <option data-code="GG" value="Guernsey">{{ 'countries.GG' | t }}</option>
+            <option data-code="HU" value="Hungary">{{ 'countries.HU' | t }}</option>
+            <option data-code="IM" value="Isle Of Man">{{ 'countries.IM' | t }}</option>
+            <option data-code="AX" value="Aland Islands">{{ 'countries.AX' | t }}</option>
+            <option data-code="FO" value="Faroe Islands">{{ 'countries.FO' | t }}</option>
+            <option data-code="IE" value="Ireland">{{ 'countries.IE' | t }}</option>
+            <option data-code="IS" value="Iceland">{{ 'countries.IS' | t }}</option>
+            <option data-code="IT" value="Italy">{{ 'countries.IT' | t }}</option>
+            <option data-code="JE" value="Jersey">{{ 'countries.JE' | t }}</option>
+            <option data-code="XK" value="Kosovo">{{ 'countries.XK' | t }}</option>
+            <option data-code="RE" value="Reunion">{{ 'countries.RE' | t }}</option>
+            <option data-code="LV" value="Latvia">{{ 'countries.LV' | t }}</option>
+            <option data-code="LI" value="Liechtenstein">{{ 'countries.LI' | t }}</option>
+            <option data-code="LT" value="Lithuania">{{ 'countries.LT' | t }}</option>
+            <option data-code="LU" value="Luxembourg">{{ 'countries.LU' | t }}</option>
+            <option data-code="MK" value="North Macedonia">{{ 'countries.MK' | t }}</option>
+            <option data-code="MT" value="Malta">{{ 'countries.MT' | t }}</option>
+            <option data-code="YT" value="Mayotte">{{ 'countries.YT' | t }}</option>
+            <option data-code="MD" value="Moldova, Republic of">{{ 'countries.MD' | t }}</option>
+            <option data-code="MC" value="Monaco">{{ 'countries.MC' | t }}</option>
+            <option data-code="ME" value="Montenegro">{{ 'countries.ME' | t }}</option>
+            <option data-code="NO" value="Norway">{{ 'countries.NO' | t }}</option>
+            <option data-code="NL" value="Netherlands">{{ 'countries.NL' | t }}</option>
+            <option data-code="PL" value="Poland">{{ 'countries.PL' | t }}</option>
+            <option data-code="PT" value="Portugal">{{ 'countries.PT' | t }}</option>
+            <option data-code="RO" value="Romania">{{ 'countries.RO' | t }}</option>
+            <option data-code="GB" value="United Kingdom">{{ 'countries.GB' | t }}</option>
+            <option data-code="SM" value="San Marino">{{ 'countries.SM' | t }}</option>
+            <option data-code="RS" value="Serbia">{{ 'countries.RS' | t }}</option>
+            <option data-code="SK" value="Slovakia">{{ 'countries.SK' | t }}</option>
+            <option data-code="SI" value="Slovenia">{{ 'countries.SI' | t }}</option>
+            <option data-code="SE" value="Sweden">{{ 'countries.SE' | t }}</option>
+            <option data-code="CH" value="Switzerland">{{ 'countries.CH' | t }}</option>
+            <option data-code="SJ" value="Svalbard And Jan Mayen">{{ 'countries.SJ' | t }}</option>
+            <option data-code="CZ" value="Czech Republic">{{ 'countries.CZ' | t }}</option>
+            <option data-code="TR" value="Turkey">{{ 'countries.TR' | t }}</option>
+            <option data-code="UA" value="Ukraine">{{ 'countries.UA' | t }}</option>
+          </select>
+        </div>
+        <div class="input-group half">
+          <label for="firstname">{{ 'weichie.cart.firstname' | t }}</label>
+          <input type="text" id="firstname" name="firstname">
+        </div>
+        <div class="input-group half">
+          <label for="name">{{ 'weichie.cart.lastname' | t }}</label>
+          <input type="text" id="name" name="name">
+        </div>
+        <div class="input-group full">
+          <label for="entreprise">{{ 'weichie.cart.company' | t }}</label>
+          <input type="text" id="entreprise" name="entreprise">
+        </div>
+        <div class="input-group full">
+          <label for="address">{{ 'weichie.cart.address' | t }}</label>
+          <input type="text" id="address" name="address">
+        </div>
+        <div class="input-group full">
+          <label for="apt">{{ 'weichie.cart.appartment' | t }}</label>
+          <input type="text" id="apt" name="apt">
+        </div>
+        <div class="input-group half">
+          <label for="zip">{{ 'weichie.cart.zip' | t }}</label>
+          <input type="text" id="zip" name="zip">
+        </div>
+        <div class="input-group half">
+          <label for="city">{{ 'weichie.cart.city' | t }}</label>
+          <input type="text" id="city" name="city">
+        </div>
+        <div class="input-group full input-center">
+          <a href="#!" class="btn btn__primary" id="submit_cart">{{ 'weichie.cart.send_request' | t }}</a>
+        </div>
+      </div>
+      <div class="modal__success">
+        {% for block in section.blocks %}
+          {%- case block.type -%}
+            {%- when 'vat' -%}
+              <h2>{{block.settings.success_title}}</h2>
+              <p>{{block.settings.success_message}}</p>
+              <a href="/cart/clear" class="btn btn__primary btn__clear">OK</a>
+          {%- endcase -%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  class CartNote extends HTMLElement {
+    constructor() {
+      super();
+
+      this.addEventListener('change', debounce((event) => {
+        const body = JSON.stringify({ note: event.target.value });
+        fetch(`${routes.cart_update_url}`, {...fetchConfig(), ...{ body }});
+      }, 300))
+    }
+  }
+
+  customElements.define('cart-note', CartNote);
+{% endjavascript %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function isIE() {
+      const ua = window.navigator.userAgent;
+      const msie = ua.indexOf('MSIE ');
+      const trident = ua.indexOf('Trident/');
+
+      return (msie > 0 || trident > 0);
+    }
+
+    if (!isIE()) return;
+    const cartSubmitInput = document.createElement('input');
+    cartSubmitInput.setAttribute('name', 'checkout');
+    cartSubmitInput.setAttribute('type', 'hidden');
+    document.querySelector('#cart').appendChild(cartSubmitInput);
+    document.querySelector('#checkout').addEventListener('click', function(event) {
+      document.querySelector('#cart').submit();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-cart-footer.name",
+  "class": "cart__footer-wrapper",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_cart_note",
+      "default": false,
+      "label": "t:sections.main-cart-footer.settings.show_cart_note.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "t:sections.main-cart-footer.blocks.subtotal.name",
+      "limit": 1
+    },
+    {
+      "type": "buttons",
+      "name": "t:sections.main-cart-footer.blocks.buttons.name",
+      "limit": 1
+    },
+    {
+      "type": "vat",
+      "name": "VAT Block",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "vat_label",
+          "label": "VAT Label"
+        },
+        {
+          "type": "textarea",
+          "id": "vat_info",
+          "label": "VAT Info"
+        },
+        {
+          "type": "text",
+          "id": "success_title",
+          "label": "Success Title"
+        },
+        {
+          "type": "textarea",
+          "id": "success_message",
+          "label": "Success Message"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

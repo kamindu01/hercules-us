@@ -1,0 +1,73 @@
+<div class="regular__text__block" style="background-image:url('https://cdn.shopify.com/s/files/1/0601/9219/4811/files/bg-wave.png?v=1635509970');">
+  <div class="page-width">
+    <h2>{{ section.settings.title }}</h2>
+
+    {%- if section.settings.content -%}
+      <div class="content">
+        {{ section.settings.content }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.cta_link != '' -%}
+      <a href="{{ section.settings.cta_link }}" class="btn {{ section.settings.button_color }}{% if section.settings.show_popup%} js-show-contact{% endif %}">{{ section.settings.cta_title }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Regular Textblock",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Section Title"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Button Title",
+      "default": "Contacteer ons"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popup",
+      "label": "Show contact popup",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "button_color",
+      "label": "Button Color",
+      "options": [
+        {
+          "value": "btn__secondary",
+          "label": "Orange"
+        },
+        {
+          "value": "btn__primary",
+          "label": "Blue"
+        }
+      ],
+      "default": "btn__primary"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Regular Textblock"
+    }
+  ]
+}
+{% endschema %}

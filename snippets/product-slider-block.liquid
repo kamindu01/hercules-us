@@ -1,0 +1,38 @@
+<div class="product__slider__item">
+  <div class="product__slider__slide">
+    {%- assign showArrows = product.images | size -%}
+    {%- if showArrows > 1 -%}
+      <a class="slider__nav{% if ishome %} home__nav{% endif%} prev test-prev" id="prev-an-{{ card_index | minus: 1 }}"><svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></a>
+      <a class="slider__nav{% if ishome %} home__nav{% endif%} next test-next" id="next-an-{{ card_index | minus: 1 }}"><svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></a>
+    {%- endif -%}
+
+    {% for cover in product.images %}
+      <a href="{{product.url }}" class="product__slider-cover">
+        {%- assign cover_url = cover | img_url: '200x' -%}
+        <img src="{{ cover_url }}" alt="{{ product.title }}">
+      </a>
+    {% endfor %}
+  </div>
+  <a href="{{ product.url }}">
+    <div class="product__slider-content">
+      <h3>{{ product.title }}</h3>
+
+      {%- assign variantAmount = product.first_available_variant.title | split: " / " | last -%}
+      {%- assign constFirstAmount = product.first_available_variant.title | split: " / " | last -%}
+      {%- assign variantPrice = product.first_available_variant.price | divided_by: variantAmount -%}
+      {%- assign lowest_price = product.first_available_variant.price | divided_by: constFirstAmount -%}
+
+      {%- for variant in product.variants -%}
+        {%- assign variantAmount = variant.title | split: " / " | last -%}
+        {%- assign variantPrice = variant.price | divided_by: variantAmount -%}
+
+        {%- if variantPrice < lowest_price -%}
+          {%- assign lowest_price = variantPrice -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <span class="price btw__price" data-price="{{ lowest_price | divided_by: 1.21 | money }}" data-btw="{{ lowest_price | money }}">{{ 'weichie.general.from' | t }} <em class="btw__display__price">{{ lowest_price | money }}</em></span>
+      <span class="btn btn__primary">{{ 'weichie.category_page.read_more' | t }}</span>
+    </div>
+  </a>
+</div>

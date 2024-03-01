@@ -1,0 +1,76 @@
+<div class="footer__copy">
+  <div class="page-width">
+    <small class="links">
+      <a href="{{ shop.url }}">&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}</a>
+      <a href="/policies/legal-notice">{{ 'weichie.footer.legal_notice' | t }}</a>
+      <a href="/policies/terms-of-service">{{ 'weichie.footer.terms_of_use' | t }}</a>
+      <a href="/policies/privacy-policy">{{ 'weichie.footer.privacy_policy' | t }}</a>
+    </small>
+
+    {%- if show_payment -%}
+      <div class="footer__payment">
+        <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+        <ul class="list list-payment" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="list-payment__item">
+              {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    <!-- Flags section -->
+<div class="footer__flags">
+    <ul class="list list-flags" role="list">
+        <li>
+            <a href="https://www.hercules-merchandise.nl/" target="_blank">
+                <span class="flag-icon flag-icon-nl"></span>
+            </a>
+        </li>
+        <li>
+            <a href="https://hercules-merchandising.fr/" target="_blank">
+                <span class="flag-icon flag-icon-fr"></span>
+            </a>
+        </li>
+        <li>
+            <a href="https://hercules-merchandise.co.uk/" target="_blank">
+                <span class="flag-icon flag-icon-gb"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    {%- endif -%}
+    <!-- <small>
+      <a href="https://weichie.com/?utm_source=hermesmerch.be&utm_medium=footerlink&utm_campaign=clientsite" target="_blank">Website by Weichie.com</a>
+    </small> -->
+  </div>
+  <style>
+.list-flags {
+    list-style-type: none; /* Removes the bullet point */
+    padding-left: 0; /* Removes any default padding */
+    display: flex;
+    gap: 10px; /* Adds some space between the flags */
+}
+
+.flag-icon {
+    vertical-align: middle; /* Aligns the flag with the middle of the text */
+}
+
+.list-flags a {
+    text-decoration: none; /* Removes the underline */
+    opacity: 1; /* Makes the flag fully visible */
+    transition: opacity 0.3s; /* Smooth transition effect */
+}
+
+.list-flags a:hover {
+    opacity: 0.6; /* Reduces the opacity on hover to give a grayed-out effect */
+    text-decoration: none; /* Ensures no underline on hover */
+}
+
+
+  </style>
+</div>
+
+
+
+

@@ -1,0 +1,50 @@
+{% comment %}
+    Renders a simple product card
+
+    product: product_card_product
+    card_index: index
+{% endcomment %}
+
+{%- if background_image -%}
+  {%- assign imageurl = background_image | img_url: 'master' -%}
+  {%- assign styleTag = "background-image:url('%1')" | replace: '%1',imageurl -%}
+{%- else -%}
+{%- assign styleTag = "background:%1" | replace: '%1',background -%}
+{%- endif -%}
+
+<div class="simple__card">
+  <div class="simple__card__slider" style="{{ styleTag }}">
+    {%- assign showArrows = product_card_product.images | size -%}
+    {%- if showArrows > 1 -%}
+      <a class="slider__nav prev" style="color: {{ arrows }}" id="prev-for-{{ card_index | minus: 1 }}"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></a>
+      <a class="slider__nav next" style="color: {{ arrows }}" id="next-for-{{ card_index | minus: 1 }}"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></a>
+    {%- endif -%}
+
+    {% for cover in product_card_product.images %}
+      {%- assign cover_url = cover | img_url: 'large' -%}
+      <a class="simple__card__slide" href="{{ product_card_product.url }}" style="background-image: url('{{ cover_url }}');"></a>
+    {% endfor %}
+  </div>
+
+  <div class="simple__card__content">
+    <h2>{{ product_card_product.title | escape }}</h2>
+
+    {%- if product_card_product.metafields.product_fields.short_description != empty -%}
+      <p>{{ product_card_product.metafields.product_fields.short_description | escape }}</p>
+    {%- endif -%}
+
+    <a href="{{ product_card_product.url }}" class="btn btn__primary">{{ 'weichie.category_page.read_more' | t }}</a>
+
+    <ul class="usp__list">
+      {% for i in (1..4) %}
+        {%- assign usp = 'usp_' | append: forloop.index  -%}
+        {%- if product_card_product.metafields.product_fields[usp] != blank -%}
+          <li>
+            {% render 'icon-checkmark' %}
+            {{ product_card_product.metafields.product_fields[usp] }}
+          </li>
+        {%- endif -%}
+      {% endfor %}
+    </ul>
+  </div>
+</div>

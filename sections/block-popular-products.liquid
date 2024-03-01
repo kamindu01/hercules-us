@@ -1,0 +1,67 @@
+
+<div class="page-width">
+  <div class="product__slider__wrapper slides--{{ section.settings.slider_items }}">
+    <h2>{{ section.settings.title }}</h2>
+
+    <div class="product__slider" data-slides="{{ section.settings.slider_items }}" data-auto="{{ section.settings.autoslide }}">
+      <span class="slider__nav featured__products nav__product prev"><</span>
+      <span class="slider__nav featured__products nav__product next">></span>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'Products' -%}
+            {%- assign product = all_products[block.settings.product_id] %}
+            {% render 'product-slider-block', product: product, card_index: forloop.index, ishome: true %}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Slider",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Collection Title"
+    },
+    {
+      "type": "range",
+      "id": "slider_items",
+      "label": "Items to show",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "autoslide",
+      "label": "Autoslide",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Products",
+      "name": "Products",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product_id",
+          "label": "Select Products"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Slider"
+    }
+  ]
+}
+{% endschema %}

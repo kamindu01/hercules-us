@@ -1,0 +1,14 @@
+{%- if type == 'product' -%}
+  {%- assign productUrl = shop.url | append: product.url -%}
+  {%- assign productTitle = product.title -%}
+{%- else -%}
+  {%- assign productUrl = shop.url | append: article.url -%}
+  {%- assign productTitle = article.title -%}
+{%- endif -%}
+
+<ul class="social__sharing">
+  <li><span class="text">{{ 'weichie.general.share' | t }}:</span></li>
+  <li><a class="share twitter" data-network="twitter" href="https://twitter.com/share?url={{ productUrl }}&text={{ productTitle }}">{% render 'icon-twitter' %}</a></li>
+  <li><a class="share facebook" data-network="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ productUrl }}&t={{ productTitle }}">{% render 'icon-facebook' %}</a></li>
+  <li><a class="share linkedin" data-network="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ productUrl }}&title={{ productTitle }}&source=hercules-merchandise">{% render 'icon-linkedin' %}</a></li>
+</ul>

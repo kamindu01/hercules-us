@@ -1,0 +1,91 @@
+
+<div class="icon__list__wrapper">
+  <div class="page-width">
+    <h2>
+      {{ section.settings.title }}
+      {%- if section.settings.cta_link != '' -%}
+        <a href="{{ section.settings.cta_link }}" class="btn btn__primary__ghost{% if section.settings.show_popup%} js-show-contact{% endif %}">{{ section.settings.cta_title }}</a>
+      {%- endif -%}
+    </h2>
+
+    {%- if section.settings.intro != '' -%}
+      <p class="intro">{{ section.settings.intro }}</p>
+    {%- endif -%}
+
+    <ul class="small__icon__list list-{{ section.blocks.size }}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+            <li>
+              <div class="img__wrapper">
+                <img src="{{ block.settings.svg_link }}" alt="{{ block.settings.title }}" />
+              </div>
+              <strong>{{ block.settings.title }}</strong>
+            </li>
+        {%- endcase -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Small Icon List",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Collection Title"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Small Introduction"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Link Title",
+      "default": "Meer info"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popup",
+      "label": "Show contact popup",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Products",
+      "settings": [
+        {
+          "type": "text",
+          "id": "svg_link",
+          "label": "SVG Link",
+          "info": "Upload your .svg icons to your Shopify files under settings. Past the link here to display the icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Small Icon List"
+    }
+  ]
+}
+{% endschema %}

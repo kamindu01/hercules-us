@@ -1,0 +1,162 @@
+{%- assign class = '' -%}
+{%- if section.settings.home_page_only and template != 'index' -%}
+  {%- assign class = ' empty__banner' -%}
+{%- endif -%}
+ {% if template == "productxx" %} 
+<style>
+    #shopify-section-header-usp-bar{
+  display:none !important;
+} 
+ </style>
+   {% endif %} 
+
+<div class="page-width">
+  <div class="header__usp__banner{% if template == "product" %} blank__banner{% endif %}{{ class }}" style=" background: {{ section.settings.background_color }};color: {{ section.settings.forecolor }};">
+    {%- unless section.settings.home_page_only and template != 'index' -%}
+      {%- unless template == "productx" -%}
+
+     
+            
+    
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'text' -%}
+              {%- assign icon = block.settings.usp_icon -%}
+              <div class="usp__item">
+                <!-- {% render 'icon-checkmark' %} -->
+                {%- if icon -%}
+                  <img class="usp__header__icon" src="{{ icon | img_url: 'master' }}" alt="{{ block.settings.title }}" width="20px" height="20px">
+                {%- endif -%}
+                {{ block.settings.title }}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%  comment %}
+        <a href="/pages/onze-producten" class="btn btn__primary__ghost"><span class="btn__icon"><</span> Back to overview</a>
+         {%  endcomment %}
+        
+               
+      {%- endunless -%}
+
+           {%- if shop.phone != ''  -%}
+        <a href="tel:{{ shop.phone }}" class="header-phone btn btn__primary">{{ shop.phone }}</a>
+      {%- endif -%}
+   
+
+    {%- endunless -%}
+
+    <!-- Mobile-specific elements -->
+    <div class="mobile-buttons">
+      {%- if shop.phone != '' -%}
+        <a href="tel:{{ shop.phone }}" class="mobile-header-phone btn btn__primary mobile-only">Phone : {{ shop.phone }}</a>
+        {%- endif -%}
+
+      <a href="/pages/contact" class="btn btn__primary__ghost js-show-contact">Contact</a>
+    </div>
+    <!-- End of Mobile-specific elements -->      
+  </div>
+
+  {%- if template == 'index' -%}
+    <div class="website__intro">
+      <p>{{ section.settings.home_intro }}</p>
+    </div>
+  {%- endif -%}
+</div>
+
+        
+
+{% stylesheet %} 
+.header-phone.mobile-only{
+  padding: 15px !important;
+  margin: auto !important;
+  text-allign: center !important;
+  text-transform: capitalize !important;
+}
+
+  @media screen and (max-width: 767px) {
+    .usp__item,
+    .website__intro {
+      display: none !important;
+    }
+    .mobile-buttons {
+      display: flex !important;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 25px;
+      margin: 5px 0 5px 0;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .mobile-buttons {
+      display: none !important;
+    }
+  }
+.blank__banner{
+  display:none;
+}
+.mobile-header-phone{
+padding: 0.3rem 1.1rem !important;
+}
+
+{% endstylesheet %} 
+
+{% schema %}
+{
+  "name": "USP Banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": "Show only on homepage",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1d9ad8",
+      "info": "Theme blue: #1d9ad8"
+    },
+    {
+      "type": "color",
+      "id": "forecolor",
+      "label": "Text Color",
+      "default": "#ffffff",
+      "info": "Text color"
+    },
+    {
+      "type": "textarea",
+      "id": "home_intro",
+      "label": "Website Intro",
+      "info": "Introtext only visible on mobile"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "usp",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Gratis ontwerp",
+          "label": "USP Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "usp_icon",
+          "label": "Icon"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+{% endschema %}

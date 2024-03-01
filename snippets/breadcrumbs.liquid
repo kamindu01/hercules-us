@@ -1,0 +1,171 @@
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+  {%- assign t = template | split: '.' | first -%}
+
+  <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a href="/">Home</a>
+      </li>
+      {%- case t -%}
+        {%- when 'page' -%}
+          <li class="breadcrumbs__item">
+            <a href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+          </li>
+        {%- when 'product' -%}
+          {%- assign product_collection = product.collections.first -%}
+          {%- if product_collection -%}
+            <li class="breadcrumbs__item">
+              {{ product_collection.title | link_to: product_collection.url }}
+            </li>
+          {%- endif -%}
+          <li class="breadcrumbs__item">
+            <a href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+          </li>
+        {%- when 'collection' and collection.handle -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              {{ collection.title | link_to: collection.url }}
+            </li>
+            <li class="breadcrumbs__item">
+              {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+              <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: ' + ' }}</a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <a href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+            </li>
+          {%- endif -%}
+        {%- when 'blog' -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              {{ blog.title | link_to: blog.url }}
+            </li>
+            <li class="breadcrumbs__item">
+              {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+              <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: ' + ' }}</a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <a href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+            </li>
+          {%- endif -%}
+        {%- when 'article' -%}
+          <li class="breadcrumbs__item">
+            {{ blog.title | link_to: blog.url }}
+          </li>
+          <li class="breadcrumbs__item">
+            <a href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <a href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+          </li>
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endunless -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://hercules-merchandise.co.uk/"
+    },
+    {%- case t -%}
+      {%- when 'page' -%}
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ page.title }}",
+          "item": "https://hercules-merchandise.co.uk/{{ page.url }}"
+        }
+      {%- when 'product' -%}
+        {%- assign product_collection = product.collections.first -%}
+        {%- if product_collection -%}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ product_collection.title }}",
+            "item": "https://hercules-merchandise.co.uk/{{ product_collection.url }}"
+          },
+        {%- endif -%}
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ product.title }}",
+          "item": "https://hercules-merchandise.co.uk/{{ product.url }}"
+        }
+      {%- when 'collection' and collection.handle -%}
+        {%- if current_tags -%}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ collection.title }}",
+            "item": "https://hercules-merchandise.co.uk/{{ collection.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ current_tags | join: ' + ' }}",
+            "item": "https://hercules-merchandise.co.uk/{{ collection.url }}/{{ current_tags | join: '+' }}"
+          }
+        {%- else -%}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ collection.title }}",
+            "item": "https://hercules-merchandise.co.uk/{{ collection.url }}"
+          }
+        {%- endif -%}
+      {%- when 'blog' -%}
+        {%- if current_tags -%}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ blog.title }}",
+            "item": "https://hercules-merchandise.co.uk/{{ blog.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ current_tags | join: ' + ' }}",
+            "item": "https://hercules-merchandise.co.uk/{{ blog.url }}/tagged/{{ current_tags | join: '+' }}"
+          }
+        {%- else -%}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ blog.title }}",
+            "item": "https://hercules-merchandise.co.uk/{{ blog.url }}"
+          }
+        {%- endif -%}
+      {%- when 'article' -%}
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ blog.title }}",
+          "item": "https://hercules-merchandise.co.uk/{{ blog.url }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ article.title }}",
+          "item": "https://hercules-merchandise.co.uk/{{ article.url }}"
+        }
+      {%- else -%}
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ page_title }}",
+          "item": "https://hercules-merchandise.co.uk/{{ request.path }}"
+        }
+    {%- endcase -%}
+  ]
+}
+</script>
+

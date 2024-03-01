@@ -1,0 +1,42 @@
+<div class="footer__usp">
+  <div class="page-width">
+    <div class="header__usp__banner footer__usp__banner">
+      {%- if usp_1 -%}
+        {%- assign icon_1 = usp_image_1 %}
+        <div class="usp__item">
+          {%- if icon_1 -%}
+            <img class="usp__header__icon" src="{{ icon_1 | img_url: 'master' }}" alt="{{ icon_1.alt }}">
+          {%- endif -%}
+          {{ usp_1 }}
+        </div>
+      {%- endif -%}
+      {%- if usp_4 -%}
+        {%- assign icon_4 = usp_image_4 %}
+        <div class="usp__item">
+          {%- if icon_4 -%}
+            <img class="usp__header__icon" src="{{ icon_4 | img_url: 'master' }}" alt="{{ icon_4.alt }}">
+          {%- endif -%}
+          {{ usp_4 }}
+        </div>
+      {%- endif -%}
+      {%- if usp_3 -%}
+        {%- assign icon_3 = usp_image_3 %}
+        <div class="usp__item">
+          {%- if icon_3 -%}
+            <img class="usp__header__icon" src="{{ icon_3 | img_url: 'master' }}" alt="{{ icon_3.alt }}">
+          {%- endif -%}
+          {{ usp_3 }}
+        </div>
+      {%- endif -%}
+      {%- if usp_2 -%}
+        {%- assign icon_2 = usp_image_2 %}
+        <div class="usp__item">
+          {%- if icon_2 -%}
+            <img class="usp__header__icon" src="{{ icon_2 | img_url: 'master' }}" alt="{{ icon_2.alt }}">
+          {%- endif -%}
+          {{ usp_2 }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

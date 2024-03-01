@@ -1,0 +1,389 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-newsletter.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-payment.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-list-social.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'disclosure.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+<noscript>{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-list-social.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'disclosure.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- if request.page_type == "collection" -%}
+  <div class="collection__footer">
+    <div class="page-width">
+      {%- assign introLength = collection.description | split: "</p>" | size -%}
+      <!-- {%- if introLength > 1 -%}
+        <div class="collection__footer-content">{{ collection.description }}</div>
+      {%- endif -%} -->
+
+      <div id= "read_more_content" class="collection__footer-content">
+        {% assign copyArray = collection.description | split: "</p>" %}
+        {% for copy in copyArray %}
+          {% unless forloop.first %}
+            {{ copy }}
+          {% endunless %}
+        {% endfor %}
+      </div>
+
+      {%- assign currentCollection = collection.title -%}
+      {%- for link in linklists.main-menu.links -%}
+        {%- if link.title == currentCollection -%}
+          {%- assign nextCollection = linklists.main-menu.links[forloop.index] -%}
+          {%- unless nextCollection == blank -%}
+            <div class="next__collection__link">
+              <small>{{ 'weichie.category_page.next_collection' | t }}:</small>
+              <a href="{{ nextCollection.url }}" class="the_link">
+                <!-- {% render 'link-icons', linkTitle: nextCollection.title %} -->
+                {%- case nextCollection.title -%}
+                  {%- when 'Echarpes', 'Sjaals' -%}
+                    {%- assign imageSrc = 'https://cdn.shopify.com/s/files/1/0601/9219/4811/files/ICONS_UPDATE_6-01.png?v=1641232294' -%}
+                  {%- when 'Bonnets', 'Mutsen' -%}
+                    {%- assign imageSrc = 'https://cdn.shopify.com/s/files/1/0601/9219/4811/files/ICONS_UPDATE_6-02.png?v=1641232149' -%}
+                  {%- when 'Equipements', 'Uitrusting', 'Teamwear' -%}
+                    {%- assign imageSrc = 'https://cdn.shopify.com/s/files/1/0601/9219/4811/files/ICONS_UPDATE_6-04_c877934f-d24a-4c9b-b3fe-68b6a583d83a.png?v=1641232196' -%}
+                  {%- when 'Fanions', 'Banners', 'Vanen' -%}
+                    {%- assign imageSrc = 'https://cdn.shopify.com/s/files/1/0601/9219/4811/files/ICONS_UPDATE_6-03.png?v=1641232208' -%}
+                  {%- when 'Accessoires', 'Accessoires' -%}
+                    {%- assign imageSrc = 'https://cdn.shopify.com/s/files/1/0601/9219/4811/files/ICONS_UPDATE_6-05.png?v=1641232231' -%}
+                  {%- when 'Textile', 'Textiel' -%}
+                    {%- assign imageSrc = 'https://cdn.shopify.com/s/files/1/0601/9219/4811/files/NEW_ICONS_2_NB_HOODY_large.png?v=1645606969' -%}
+                {%- endcase -%}
+                <img src="{{ imageSrc }}" alt="{{ nextCollection.title | escape }}">
+                <span>{{ nextCollection.title | escape }}</span>
+              </a>
+            </div>
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor - %}
+    </div>
+  </div>
+{%- endif -%}
+
+<footer class="footer gradient">
+  {%- if section.blocks.size > 0 -%}
+    <div class="footer__content-top page-width">
+      {%- if section.blocks.size > 0 -%}
+        {%- liquid
+          if section.blocks.size == 9
+            assign footer_grid_class = 'grid--3-col-tablet'
+          elsif section.blocks.size > 6
+            assign footer_grid_class = 'grid--4-col-desktop'
+          elsif section.blocks.size > 4
+            assign footer_grid_class = 'grid--3-col-tablet'
+          endif
+        -%}
+        <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--3-col-tablet grid--5-col-desktop {{ footer_grid_class }}">
+          {%- for block in section.blocks -%}
+            <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="footer-block__heading{% if block.type == 'text' %} quote{% endif %}">{{- block.settings.heading | escape -}}</h2>
+              {%- endif -%}
+
+              {%- case block.type -%}
+                {%- when 'text' -%}
+                  <div class="footer-block__details-content rte">
+                    {{ block.settings.subtext }}
+                  </div>
+
+                {%- when 'link_list' -%}
+                  {%- if block.settings.menu != blank and block.settings.heading != blank -%}
+                    <ul class="footer-block__details-content list-unstyled">
+                      {%- for link in block.settings.menu.links -%}
+                        <li>
+                          <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                            {{ link.title }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+                {%- when 'image' -%}
+                  <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
+                    {%- if block.settings.image != blank -%}
+                      {%- assign image_size = block.settings.image_width | append: 'x' -%}
+                      <img
+                        srcset= "{{ block.settings.image | img_url: image_size }}, {{ block.settings.image | img_url: image_size, scale: 2 }} 2x"
+                        src="{{ block.settings.image | img_url: '400x' }}"
+                        alt="{{ block.settings.image.alt | escape }}"
+                        loading="lazy"
+                        width="{{ block.settings.image.width }}"
+                        height="{{ block.settings.image.height }}"
+                        style="max-width: min(100%, {{ block.settings.image_width }}px);"
+                      >
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                    {%- endif -%}
+                  </div>
+
+                {%- when 'rating' -%}
+                  <div class="footer-block__details-content rte">
+                    {%- if block.settings.intro != '' -%}
+                      {{ block.settings.intro }}
+                    {%- endif -%}
+                  </div>
+
+                {%- endcase -%}
+              
+            </div>
+          {%- endfor -%}
+          {% comment %}
+          <iframe frameborder="0" style="display: flex;align-self: center;justify-content: center;margin: 0 auto;" allowtransparency="true" src="https://www.kiyoh.com/retrieve-widget.html?color=white&amp;allowTransparency=true&amp;button=false&amp;lang=fr&amp;tenantId=98&amp;locationId=1067155" width="400" height="222" class="grid__item"></iframe>
+          {% endcomment %}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_usp -%}
+    {%
+      render 'usp-banner',
+        usp_1: section.settings.usp_one,
+        usp_image_1: section.settings.usp_img_one,
+        usp_2: section.settings.usp_two,
+        usp_image_2: section.settings.usp_img_two,
+        usp_3: section.settings.usp_three,
+        usp_image_3: section.settings.usp_img_three,
+        usp_4: section.settings.usp_four,
+        usp_image_4: section.settings.usp_img_four,
+    %}
+  {%- endif -%}
+
+  {% render 'copyright', show_payment: section.settings.payment_enable %}
+</footer>
+
+{% javascript %}
+  class LocalizationForm extends HTMLElement {
+    constructor() {
+      super();
+      this.elements = {
+        input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
+        button: this.querySelector('button'),
+        panel: this.querySelector('ul'),
+      };
+      this.elements.button.addEventListener('click', this.openSelector.bind(this));
+      this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+      this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+
+      this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+    }
+
+    hidePanel() {
+      this.elements.button.setAttribute('aria-expanded', 'false');
+      this.elements.panel.setAttribute('hidden', true);
+    }
+
+    onContainerKeyUp(event) {
+      if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+      this.hidePanel();
+      this.elements.button.focus();
+    }
+
+    onItemClick(event) {
+      event.preventDefault();
+      const form = this.querySelector('form');
+      this.elements.input.value = event.currentTarget.dataset.value;
+      if (form) form.submit();
+    }
+
+    openSelector() {
+      this.elements.button.focus();
+      this.elements.panel.toggleAttribute('hidden');
+      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+    }
+
+    closeSelector(event) {
+      const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+      if (event.relatedTarget === null || shouldClose) {
+        this.hidePanel();
+      }
+    }
+  }
+
+  customElements.define('localization-form', LocalizationForm);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Quick links",
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label",
+          "info": "t:sections.footer.blocks.link_list.settings.heading.info"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.footer.blocks.text.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Heading",
+          "label": "t:sections.footer.blocks.text.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "default": "<p>Share store details, promotions, or brand content with your customers.</p>",
+          "label": "t:sections.footer.blocks.text.settings.subtext.label"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "label": "Image width",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Image alignment on large screen",
+          "options": [
+            {
+              "value": "",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Rating",
+          "label": "t:sections.footer.blocks.text.settings.heading.label"
+        },
+        {
+          "type": "textarea",
+          "id": "intro",
+          "label": "Intro"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "USP List",
+      "info": "Choose if you want to display the USP list in the footer or not."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_usp",
+      "label": "Show USPs in footer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "usp_one",
+      "label": "USP 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "usp_img_one",
+      "label": "USP 1 - image"
+    },
+    {
+      "type": "text",
+      "id": "usp_two",
+      "label": "USP 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "usp_img_two",
+      "label": "USP 2 - image"
+    },
+    {
+      "type": "text",
+      "id": "usp_three",
+      "label": "USP 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "usp_img_three",
+      "label": "USP 3 - image"
+    },
+    {
+      "type": "text",
+      "id": "usp_four",
+      "label": "USP 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "usp_img_four",
+      "label": "USP 4 - image"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__7.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.payment_enable.label"
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+{% endschema %}

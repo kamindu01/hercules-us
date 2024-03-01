@@ -1,0 +1,64 @@
+{%- assign hero_image = section.settings.image | img_url: '1100x400' -%}
+
+<div class="page-width">
+  <div class="hero__banner" style="background-image:url('{{ hero_image }}');">
+    <div class="filter filter-{{ section.settings.overlay }}"></div>
+    <div class="hero__banner__content">
+      <h1>{{ section.settings.h1_title }}</h1>
+      <h2>{{ section.settings.title }}</h2>
+
+      {%- if section.settings.link != '' -%}
+        <a href="{{ section.settings.link }}" class="btn btn__primary">{{ section.settings.link_text }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Cover Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "h1_title",
+      "label": "H1 Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Banner Text"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Banner"
+    }
+  ]
+}
+{% endschema %}
