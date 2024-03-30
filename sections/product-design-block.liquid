@@ -20,7 +20,7 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'step' -%}
-
+             
               <div class="design__step">
                 <img src="{{ block.settings.icon | img_url:'large'}}"/>
                 {%- if block.settings.title != '' -%}
