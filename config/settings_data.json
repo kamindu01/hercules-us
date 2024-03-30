@@ -1,1 +1,286 @@
-{"current":{"colors_solid_button_labels":"#FFFFFF","colors_accent_1":"#121212","colors_accent_2":"#334FB4","colors_text":"#121212","colors_outline_button_labels":"#121212","colors_background_1":"#FFFFFF","colors_background_2":"#F3F3F3","type_header_font":"assistant_n4","type_body_font":"assistant_n4","page_width":"1200","favicon":"shopify:\/\/shop_images\/hercules-favicon.png","belco_shop_id":"eCswiLnT5awaBdZ2k","belco_shop_secret":"5efeowI7DCjWEJ1KH77jFZr5Z07oNsqIB0AOSoRysY7","checkout_logo_image":"shopify:\/\/shop_images\/Hercules_Merchandising_webshop.jpg","checkout_logo_position":"center","checkout_logo_size":"large","checkout_accent_color":"#1d9ad8","checkout_button_color":"#1d9ad8","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"edf76d69-0065-4570-8ee6-189916b1beaa":{"type":"announcement","disabled":true,"settings":{"text":"Lead times for knitted items are currently above average. Contact us quickly when you had a specific deadline!","link":"","background_color":"#1d9ad8","foreground_color":"#ffffff"}}},"block_order":["edf76d69-0065-4570-8ee6-189916b1beaa"],"settings":{}},"header":{"type":"header","blocks":{"71f2b8b7-59d5-4bdf-85ec-cd39c838d3eb":{"type":"menu-item","settings":{"menu_icon":"shopify:\/\/shop_images\/ICONS_UPDATE_6-01.png","title":"Scarves","link_url":"shopify:\/\/collections\/custom-scarves"}},"4460e199-ce2b-49e1-b23f-6917ed65e0ad":{"type":"menu-item","settings":{"menu_icon":"shopify:\/\/shop_images\/ICONS_UPDATE_6-02.png","title":"Beanies","link_url":"shopify:\/\/collections\/custom-hats-and-beanies"}},"b79fcc53-5e0d-4646-b1b1-492e151f153b":{"type":"menu-item","settings":{"menu_icon":"shopify:\/\/shop_images\/ICONS_UPDATE_6-04.png","title":"Sportswear","link_url":"shopify:\/\/collections\/custom-printed-sportswear"}},"d6fe7142-fac6-4b21-a06c-2445798e51fb":{"type":"menu-item","settings":{"menu_icon":"shopify:\/\/shop_images\/ICONS_UPDATE_6-03.png","title":"Pennants","link_url":"shopify:\/\/collections\/custom-football-pennants"}},"b3c4baec-8b25-40fc-b6e0-6b73c85a7f09":{"type":"menu-item","settings":{"menu_icon":"shopify:\/\/shop_images\/ICONS_UPDATE_6-05.png","title":"Accessories","link_url":"shopify:\/\/collections\/football-accessories"}},"f9e6faff-c654-4c0e-ba45-4d705ad16fca":{"type":"menu-item","settings":{"menu_icon":"shopify:\/\/shop_images\/Tifo.png","title":"Fan items","link_url":"shopify:\/\/collections\/custom-fan-items"}},"519d4adb-c9e2-41d9-97f3-e8ce8486cde4":{"type":"menu-item","settings":{"menu_icon":"shopify:\/\/shop_images\/NEW_ICONS_2_NB_HOODY.png","title":"Textile","link_url":"shopify:\/\/collections\/custom-textile"}}},"block_order":["71f2b8b7-59d5-4bdf-85ec-cd39c838d3eb","4460e199-ce2b-49e1-b23f-6917ed65e0ad","b79fcc53-5e0d-4646-b1b1-492e151f153b","d6fe7142-fac6-4b21-a06c-2445798e51fb","b3c4baec-8b25-40fc-b6e0-6b73c85a7f09","f9e6faff-c654-4c0e-ba45-4d705ad16fca","519d4adb-c9e2-41d9-97f3-e8ce8486cde4"],"settings":{"enable_redirect_banner":false,"redirect_content":"","logo":"shopify:\/\/shop_images\/Hercules_Merchandising_webshop_400x_3003e786-aabf-4cc1-ae4d-5c1143fad9c0.jpg","slogan":"shopify:\/\/shop_images\/HERCULES_UK_LOGO_NO_BACKGROUND_SLOGAN.png","menu":"main-menu"}},"footer":{"type":"footer","blocks":{"54b7ac3d-1f73-44ea-a8f2-da0968f9db4d":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Hercules_Merchandising_webshop_400x_3003e786-aabf-4cc1-ae4d-5c1143fad9c0.jpg","image_width":200,"alignment":""}},"footer-0":{"type":"link_list","settings":{"heading":"Information","menu":"footer-quick-links"}},"9774f65b-7298-497c-b9cf-2989e575e399":{"type":"link_list","settings":{"heading":"Our offer","menu":"main-menu"}},"footer-1":{"type":"text","settings":{"heading":"“","subtext":"<p>Sports merchandise specialist with over 10 years of experience. Superior European quality with short delivery times and starting from small quantities.<\/p>"}}},"block_order":["54b7ac3d-1f73-44ea-a8f2-da0968f9db4d","footer-0","9774f65b-7298-497c-b9cf-2989e575e399","footer-1"],"settings":{"show_usp":true,"usp_one":"Free design","usp_img_one":"shopify:\/\/shop_images\/icon-check-circle-blue_1.png","usp_two":"Free Delivery","usp_img_two":"shopify:\/\/shop_images\/icon-delivery-blue_1.png","usp_three":"10+ years of experience in sports merchandise","usp_img_three":"shopify:\/\/shop_images\/icon-experience-blue_1.png","usp_four":"European production","usp_img_four":"shopify:\/\/shop_images\/icon-europe-blue_1.png","payment_enable":true}},"header-usp-bar":{"type":"header-usp-bar","blocks":{"header-usp-bar-0":{"type":"text","settings":{"title":"Free design","usp_icon":"shopify:\/\/shop_images\/icon-check-circle-white_1.png"}},"03f96d45-711d-4b3f-be51-0d6f2db0a63a":{"type":"text","settings":{"title":"Free delivery","usp_icon":"shopify:\/\/shop_images\/icon-delivery_1.png"}},"8a8738a7-433d-4ad8-beda-e5a86dc2a700":{"type":"text","settings":{"title":"10+ years experience in sports merchandise","usp_icon":"shopify:\/\/shop_images\/icon-experience_1.png"}},"46a70001-c0db-484f-8623-e035eb70d52f":{"type":"text","settings":{"title":"European production","usp_icon":"shopify:\/\/shop_images\/icon-europe-white_1.png"}},"b64605ac-193e-4f41-a146-ab0adc49a87b":{"type":"text","disabled":true,"settings":{"title":"(+33) 09 79 03 02 95"}}},"block_order":["header-usp-bar-0","03f96d45-711d-4b3f-be51-0d6f2db0a63a","8a8738a7-433d-4ad8-beda-e5a86dc2a700","46a70001-c0db-484f-8623-e035eb70d52f","b64605ac-193e-4f41-a146-ab0adc49a87b"],"settings":{"home_page_only":false,"background_color":"#1d9ad8","forecolor":"#ffffff","home_intro":"Specialist in sports merchandise with over 10 years of experience. Superior European quality with short delivery times and low minimum order quantities."}}},"content_for_index":[],"blocks":{"6279071938380501511":{"type":"shopify:\/\/apps\/powerful-contact-form-builder\/blocks\/app-embed\/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d","disabled":false,"settings":{}}}},"presets":{"Default":{"colors_solid_button_labels":"#FFFFFF","colors_accent_1":"#121212","colors_accent_2":"#334FB4","colors_text":"#121212","colors_outline_button_labels":"#121212","colors_background_1":"#FFFFFF","colors_background_2":"#F3F3F3","type_header_font":"assistant_n4","type_body_font":"assistant_n4","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-bar-0":{"type":"announcement","settings":{"background_color":"#1d9ad8","foreground_color":"#ffffff"}}},"block_order":["announcement-bar-0"],"settings":{}}}},"Craft":{"colors_solid_button_labels":"#EFECEC","colors_accent_1":"#2A332F","colors_accent_2":"#476154","colors_text":"#1C1A1A","colors_outline_button_labels":"#7B8382","colors_background_1":"#EFECEC","colors_background_2":"#C1BCAE","type_header_font":"americana_n4","type_body_font":"quattrocento_sans_n4","sections":{"footer":{"type":"footer","blocks":{"menu":{"type":"link_list","settings":{}},"text":{"type":"text","settings":{}}},"block_order":["menu","text"],"settings":{}}}}}}
+{
+  "current": {
+    "colors_solid_button_labels": "#FFFFFF",
+    "colors_accent_1": "#121212",
+    "colors_accent_2": "#334FB4",
+    "colors_text": "#121212",
+    "colors_outline_button_labels": "#121212",
+    "colors_background_1": "#FFFFFF",
+    "colors_background_2": "#F3F3F3",
+    "type_header_font": "assistant_n4",
+    "type_body_font": "assistant_n4",
+    "page_width": "1200",
+    "favicon": "shopify:\/\/shop_images\/hercules-favicon.png",
+    "belco_shop_id": "eCswiLnT5awaBdZ2k",
+    "belco_shop_secret": "5efeowI7DCjWEJ1KH77jFZr5Z07oNsqIB0AOSoRysY7",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Hercules_Merchandising_webshop.jpg",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "large",
+    "checkout_accent_color": "#1d9ad8",
+    "checkout_button_color": "#1d9ad8",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "edf76d69-0065-4570-8ee6-189916b1beaa": {
+            "type": "announcement",
+            "disabled": true,
+            "settings": {
+              "text": "Lead times for knitted items are currently above average. Contact us quickly when you had a specific deadline!",
+              "link": "",
+              "background_color": "#1d9ad8",
+              "foreground_color": "#ffffff"
+            }
+          }
+        },
+        "block_order": [
+          "edf76d69-0065-4570-8ee6-189916b1beaa"
+        ],
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "71f2b8b7-59d5-4bdf-85ec-cd39c838d3eb": {
+            "type": "menu-item",
+            "settings": {
+              "menu_icon": "shopify:\/\/shop_images\/ICONS_UPDATE_6-01.webp",
+              "title": "Scarves",
+              "link_url": "shopify:\/\/collections\/custom-scarves"
+            }
+          },
+          "4460e199-ce2b-49e1-b23f-6917ed65e0ad": {
+            "type": "menu-item",
+            "settings": {
+              "menu_icon": "shopify:\/\/shop_images\/ICONS_UPDATE_6-02.webp",
+              "title": "Beanies",
+              "link_url": "shopify:\/\/collections\/custom-hats-and-beanies"
+            }
+          },
+          "b79fcc53-5e0d-4646-b1b1-492e151f153b": {
+            "type": "menu-item",
+            "settings": {
+              "menu_icon": "shopify:\/\/shop_images\/ICONS_UPDATE_6-04.webp",
+              "title": "Sportswear",
+              "link_url": "shopify:\/\/collections\/custom-printed-sportswear"
+            }
+          },
+          "d6fe7142-fac6-4b21-a06c-2445798e51fb": {
+            "type": "menu-item",
+            "settings": {
+              "menu_icon": "shopify:\/\/shop_images\/ICONS_UPDATE_6-03.webp",
+              "title": "Pennants",
+              "link_url": "shopify:\/\/collections\/custom-football-pennants"
+            }
+          },
+          "b3c4baec-8b25-40fc-b6e0-6b73c85a7f09": {
+            "type": "menu-item",
+            "settings": {
+              "menu_icon": "shopify:\/\/shop_images\/ICONS_UPDATE_6-05.webp",
+              "title": "Accessories",
+              "link_url": "shopify:\/\/collections\/football-accessories"
+            }
+          },
+          "f9e6faff-c654-4c0e-ba45-4d705ad16fca": {
+            "type": "menu-item",
+            "settings": {
+              "menu_icon": "shopify:\/\/shop_images\/Tifo.webp",
+              "title": "Fan items",
+              "link_url": "shopify:\/\/collections\/custom-fan-items"
+            }
+          },
+          "519d4adb-c9e2-41d9-97f3-e8ce8486cde4": {
+            "type": "menu-item",
+            "settings": {
+              "menu_icon": "shopify:\/\/shop_images\/NEW_ICONS_2_NB_HOODY.webp",
+              "title": "Textile",
+              "link_url": "shopify:\/\/collections\/custom-textile"
+            }
+          }
+        },
+        "block_order": [
+          "71f2b8b7-59d5-4bdf-85ec-cd39c838d3eb",
+          "4460e199-ce2b-49e1-b23f-6917ed65e0ad",
+          "b79fcc53-5e0d-4646-b1b1-492e151f153b",
+          "d6fe7142-fac6-4b21-a06c-2445798e51fb",
+          "b3c4baec-8b25-40fc-b6e0-6b73c85a7f09",
+          "f9e6faff-c654-4c0e-ba45-4d705ad16fca",
+          "519d4adb-c9e2-41d9-97f3-e8ce8486cde4"
+        ],
+        "settings": {
+          "enable_redirect_banner": false,
+          "redirect_content": "",
+          "logo": "shopify:\/\/shop_images\/HM-Logo_1.webp",
+          "slogan": "shopify:\/\/shop_images\/HERCULES_UK_LOGO_NO_BACKGROUND_SLOGAN.webp",
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "54b7ac3d-1f73-44ea-a8f2-da0968f9db4d": {
+            "type": "image",
+            "settings": {
+              "image_width": 200,
+              "alignment": ""
+            }
+          },
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Information",
+              "menu": ""
+            }
+          },
+          "9774f65b-7298-497c-b9cf-2989e575e399": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Our offer",
+              "menu": "main-menu"
+            }
+          },
+          "footer-1": {
+            "type": "text",
+            "settings": {
+              "heading": "“",
+              "subtext": "<p>Sports merchandise specialist with over 10 years of experience. Superior European quality with short delivery times and starting from small quantities.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "54b7ac3d-1f73-44ea-a8f2-da0968f9db4d",
+          "footer-0",
+          "9774f65b-7298-497c-b9cf-2989e575e399",
+          "footer-1"
+        ],
+        "settings": {
+          "show_usp": true,
+          "usp_one": "Free design",
+          "usp_two": "Free Delivery",
+          "usp_three": "10+ years of experience in sports merchandise",
+          "usp_four": "European production",
+          "payment_enable": true
+        }
+      },
+      "header-usp-bar": {
+        "type": "header-usp-bar",
+        "blocks": {
+          "header-usp-bar-0": {
+            "type": "text",
+            "settings": {
+              "title": "Free design"
+            }
+          },
+          "03f96d45-711d-4b3f-be51-0d6f2db0a63a": {
+            "type": "text",
+            "settings": {
+              "title": "Free delivery"
+            }
+          },
+          "8a8738a7-433d-4ad8-beda-e5a86dc2a700": {
+            "type": "text",
+            "settings": {
+              "title": "10+ years experience in sports merchandise"
+            }
+          },
+          "46a70001-c0db-484f-8623-e035eb70d52f": {
+            "type": "text",
+            "settings": {
+              "title": "European production"
+            }
+          },
+          "b64605ac-193e-4f41-a146-ab0adc49a87b": {
+            "type": "text",
+            "disabled": true,
+            "settings": {
+              "title": "(+33) 09 79 03 02 95"
+            }
+          }
+        },
+        "block_order": [
+          "header-usp-bar-0",
+          "03f96d45-711d-4b3f-be51-0d6f2db0a63a",
+          "8a8738a7-433d-4ad8-beda-e5a86dc2a700",
+          "46a70001-c0db-484f-8623-e035eb70d52f",
+          "b64605ac-193e-4f41-a146-ab0adc49a87b"
+        ],
+        "settings": {
+          "home_page_only": false,
+          "background_color": "#1d9ad8",
+          "forecolor": "#ffffff",
+          "home_intro": "Specialist in sports merchandise with over 10 years of experience. Superior European quality with short delivery times and low minimum order quantities."
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  },
+  "presets": {
+    "Default": {
+      "colors_solid_button_labels": "#FFFFFF",
+      "colors_accent_1": "#121212",
+      "colors_accent_2": "#334FB4",
+      "colors_text": "#121212",
+      "colors_outline_button_labels": "#121212",
+      "colors_background_1": "#FFFFFF",
+      "colors_background_2": "#F3F3F3",
+      "type_header_font": "assistant_n4",
+      "type_body_font": "assistant_n4",
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "blocks": {
+            "announcement-bar-0": {
+              "type": "announcement",
+              "settings": {
+                "background_color": "#1d9ad8",
+                "foreground_color": "#ffffff"
+              }
+            }
+          },
+          "block_order": [
+            "announcement-bar-0"
+          ],
+          "settings": {
+          }
+        }
+      }
+    },
+    "Craft": {
+      "colors_solid_button_labels": "#EFECEC",
+      "colors_accent_1": "#2A332F",
+      "colors_accent_2": "#476154",
+      "colors_text": "#1C1A1A",
+      "colors_outline_button_labels": "#7B8382",
+      "colors_background_1": "#EFECEC",
+      "colors_background_2": "#C1BCAE",
+      "type_header_font": "americana_n4",
+      "type_body_font": "quattrocento_sans_n4",
+      "sections": {
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "menu": {
+              "type": "link_list",
+              "settings": {
+              }
+            },
+            "text": {
+              "type": "text",
+              "settings": {
+              }
+            }
+          },
+          "block_order": [
+            "menu",
+            "text"
+          ],
+          "settings": {
+          }
+        }
+      }
+    }
+  }
+}
