@@ -20,7 +20,7 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'step' -%}
-            <!-- {%- if block.settings.download_file != blank or block.settings.cta_url != blank -%} -->
+
               <div class="design__step">
                 <img src="{{ block.settings.icon | img_url:'large'}}"/>
                 {%- if block.settings.title != '' -%}
@@ -37,7 +37,7 @@
                   <a href="{{ block.settings.cta_url }}" class="btn btn__small btn__primary__ghost{% if block.settings.show_popup%} js-show-contact{% endif %}" {% if block.settings.downloadable %}download{% endif %}>{{ block.settings.cta_text }}</a>
                 {%- endif -%}
               </div>
-            <!-- {%- endif -%} -->
+          
         {%- endcase -%}
       {%- endfor -%}
     </div>
