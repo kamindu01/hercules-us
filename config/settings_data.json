@@ -122,6 +122,7 @@
           "54b7ac3d-1f73-44ea-a8f2-da0968f9db4d": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/HM-Logo_1.webp",
               "image_width": 200,
               "alignment": ""
             }
