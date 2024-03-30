@@ -158,9 +158,13 @@
         "settings": {
           "show_usp": true,
           "usp_one": "Free design",
+          "usp_img_one": "shopify:\/\/shop_images\/icon-check-circle-blue_1.webp",
           "usp_two": "Free Delivery",
+          "usp_img_two": "shopify:\/\/shop_images\/icon-europe-blue_1.png",
           "usp_three": "10+ years of experience in sports merchandise",
+          "usp_img_three": "shopify:\/\/shop_images\/icon-experience-blue_1.png",
           "usp_four": "European production",
+          "usp_img_four": "shopify:\/\/shop_images\/icon-delivery-blue_1.png",
           "payment_enable": true
         }
       },
