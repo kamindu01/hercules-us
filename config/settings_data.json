@@ -174,25 +174,29 @@
           "header-usp-bar-0": {
             "type": "text",
             "settings": {
-              "title": "Free design"
+              "title": "Free design",
+              "usp_icon": "shopify:\/\/shop_images\/icon-check-circle-white_1.webp"
             }
           },
           "03f96d45-711d-4b3f-be51-0d6f2db0a63a": {
             "type": "text",
             "settings": {
-              "title": "Free delivery"
+              "title": "Free delivery",
+              "usp_icon": "shopify:\/\/shop_images\/icon-delivery_1.webp"
             }
           },
           "8a8738a7-433d-4ad8-beda-e5a86dc2a700": {
             "type": "text",
             "settings": {
-              "title": "10+ years experience in sports merchandise"
+              "title": "10+ years experience in sports merchandise",
+              "usp_icon": "shopify:\/\/shop_images\/icon-experience_1.webp"
             }
           },
           "46a70001-c0db-484f-8623-e035eb70d52f": {
             "type": "text",
             "settings": {
-              "title": "European production"
+              "title": "European production",
+              "usp_icon": "shopify:\/\/shop_images\/icon-europe-white_1.webp"
             }
           },
           "b64605ac-193e-4f41-a146-ab0adc49a87b": {
