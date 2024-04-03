@@ -3,8 +3,14 @@
 <div class="contact page-width page-width--narrow spaced-section">
   <h2 class="title">{{ section.settings.heading | escape }}</h2>
 
+  {%- case request.locale.iso_code  -%}
+    {%- when 'fr' -%}
+      {formbuilder:MzUwODE=}
+    {%- when 'nl' -%}
+      {formbuilder:MzUwODE=}
+   {%- when 'en' -%}
   {formbuilder:MzUwODE=}
-
+  {%- endcase -%}
 </div>
 
 {% schema %}
