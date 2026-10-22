@@ -21,7 +21,7 @@
           <li class="breadcrumbs__item">
             <a href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
           </li>
-        {%- when 'collection' and collection.handle -%}
+        {%- when 'collection' -%}
           {%- if current_tags -%}
             <li class="breadcrumbs__item">
               {{ collection.title | link_to: collection.url }}
@@ -100,7 +100,7 @@
           "name": "{{ product.title }}",
           "item": "https://hercules-merchandise.co.uk/{{ product.url }}"
         }
-      {%- when 'collection' and collection.handle -%}
+      {%- when 'collection' -%}
         {%- if current_tags -%}
           {
             "@type": "ListItem",
@@ -169,3 +169,16 @@
 }
 </script>
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- when 'collection' and collection.handle -%}"
+  to: "{%- when 'collection' -%}"
+  position: 988..1013
+- from: "{%- when 'collection' and collection.handle -%}"
+  to: "{%- when 'collection' -%}"
+  position: 3826..3851
+{% endcomment %}
